@@ -14,7 +14,7 @@ public class VsTestExecutor : ITestDiscoverer, ITestExecutor
     static VsTestExecutor() {
         Count = int.TryParse(Environment.GetEnvironmentVariable("TEST_COUNT") ?? "1000", out var count) ? count : 1000;
         }
-    public const string Id = "executor://intent.testadapter";
+    public const string Id = "executor://perfy.testadapter";
     public static readonly Uri Uri = new Uri(Id);
 
     public static int Count { get; }
