@@ -9,9 +9,9 @@ Console.WriteLine("Hello, World!");
 
 [ExtensionUri(Id)]
 [DefaultExecutorUri(Id)]
-public class VsTestExecutor : ITestDiscoverer, ITestExecutor
+public class Perfy : ITestDiscoverer, ITestExecutor
 {
-    static VsTestExecutor()
+    static Perfy()
     {
         Count = int.TryParse(Environment.GetEnvironmentVariable("TEST_COUNT") ?? "1000", out var count) ? count : 1000;
     }
@@ -34,7 +34,7 @@ public class VsTestExecutor : ITestDiscoverer, ITestExecutor
 
     public void RunTests(IEnumerable<string> sources, IRunContext runContext, IFrameworkHandle frameworkHandle)
     {
-        var location = typeof(VsTestExecutor).Assembly.Location;
+        var location = typeof(Perfy).Assembly.Location;
         for (var i = 0; i < Count; i++) {
             var tc = new TestCase($"Test{i}", Uri, location);
             frameworkHandle.RecordResult(new TestResult(tc)
@@ -46,7 +46,7 @@ public class VsTestExecutor : ITestDiscoverer, ITestExecutor
 
     public void DiscoverTests(IEnumerable<string> sources, IDiscoveryContext discoveryContext, IMessageLogger logger, ITestCaseDiscoverySink discoverySink)
     {
-        var location = typeof(VsTestExecutor).Assembly.Location;
+        var location = typeof(Perfy).Assembly.Location;
         for (var i = 0; i < Count; i++)
         {
             discoverySink.SendTestCase(new TestCase($"Test{i}", Uri, location));
